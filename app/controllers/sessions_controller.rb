@@ -6,18 +6,18 @@ class SessionsController < ApplicationController
         username = params[:username]
         password = params[:password]
         user = User.where("username =? and activation_status =?", username,"active").first
-        user_password = Bcrypt::Engine.hash_secret(password, user.password_salt) unless user.blank?
+        user_password = BCrypt::Engine.hash_secret(password, user.password_salt) unless user.blank?
         if !user_password.blank? and user.password_hash.eql? user_password
             session[:user] = user.id
             flash[:notice] = "Welcome #{user.username}"
-            redirect_to root_url
+            redirect_to root_path
         else
             params[:username]
             flash[:error] = "Your data not valid"
             render "new"
         end
     end
-
+    
     def edit
         user = User.find_by_activation_token(params[:id])
         if user.try(:update,{activation_token: "", activation_status: "active"})
