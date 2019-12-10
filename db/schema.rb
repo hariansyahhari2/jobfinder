@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_08_195437) do
+ActiveRecord::Schema.define(version: 2019_12_10_153001) do
 
   create_table "add_age_to_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  end
+
+  create_table "add_collumn_to_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "job_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -33,6 +45,10 @@ ActiveRecord::Schema.define(version: 2019_12_08_195437) do
     t.string "activation_token"
     t.string "activation_status"
     t.integer "age"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "experience_status"
+    t.string "attachment"
   end
 
 end

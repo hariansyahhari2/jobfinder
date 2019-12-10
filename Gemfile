@@ -64,3 +64,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Bcrypt gemfile
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'humanizer'
+
+gem 'carrierwave'
+gem 'bootstrap-sass'

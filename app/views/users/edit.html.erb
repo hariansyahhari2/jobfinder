@@ -1,2 +1,3 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<%= form_for @user do |u| %>
+<%= f.radio_button :experience_status, "Fresh Graduate" %>
+<%= f.radio_button :experience_status, "Experienced" %>

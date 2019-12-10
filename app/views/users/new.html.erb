@@ -24,8 +24,11 @@
     <%= f.password_field :password_confirmation %>
     <%= @user.errors[:password_confirmation].first unless @user.errors[:password_confirmation].blank? %>
     <br/>
+    <br/>
+    <br/>
+    <br/>
     <div>
-        <br/>
+        <p>Are you a robot?</p>
         <%= f.label :humanizer_answer, @user.humanizer_question %>
         <br/>
         <%= f.text_field :humanizer_answer %>

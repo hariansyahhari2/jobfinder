@@ -16,11 +16,14 @@ class User < ActiveRecord::Base
     validates :email, presence: true, uniqueness: true
     validates :password, presence: true, on: :create, length: {minimum: 5}, confirmation: true
     validates :age, numericality: { greater_than_or_equal_to: 17, only_integer: true}
-
+    mount_uploader :attachment, AttachmentUploader
+    
     def add_salt_and_hash
         unless password.blank?
             self.password_salt = BCrypt::Engine.generate_salt
             self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
         end
     end
+    has_many :user_user
+    has_many :job, through: :job_user, dependent: :destroy
 end

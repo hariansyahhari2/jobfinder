@@ -6,6 +6,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def show
+    @users = User.find_by_id(params[:id])
+end
+
   def create
     @user = User.new(params_user)
     if @user.save
@@ -24,10 +28,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-  end
+    @user = User.find_by_id(params[:id])
+end
 
   private
   def params_user
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :humanizer_answer, :humanizer_question_id, :age)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :humanizer_answer, :humanizer_question_id, :age, :attachment)
   end
 end
