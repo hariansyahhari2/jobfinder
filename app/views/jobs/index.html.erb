@@ -1,0 +1,18 @@
+<h3>Jobs available</h3>
+<% @jobs.each do |j| %>
+    <h4><%= j.job_title %></h4>
+    <p style ="margin-left: 15px"><%= j.company %></p>
+    <p style ="margin-left: 15px"><%= j.status %></p>
+    <span style ="margin-left: 15px"><%= link_to 'read more',  job_path(j.id) %></span>
+    <span style ="margin-left: 15px"><%= link_to 'edit',  edit_job_path(j.id) %></span>
+    <span style ="margin-left: 15px"><%= link_to 'delete', job_path(j.id), method: "DELETE", data:{confirm:'Delete this job?'} %></span>
+<% end %>
+
+<h4>
+    <% if !current_user %>
+    <%= link_to 'Log-in', new_session_path %>
+    <% else %>
+    Hello <%= current_user.username %>
+    <%= link_to 'Log-Out', session_path(current_user.id), method: "DELETE" %>
+    <% end %>
+</h4>

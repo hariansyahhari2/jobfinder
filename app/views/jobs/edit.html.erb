@@ -1,0 +1,20 @@
+<%= form_for @job do |f| %>
+    <%= f.label :job_title %>
+    <br/>
+    <%= f.text_field :job_title %>
+    <%= @job.errors[:job_title].first unless @job.errors[:job_title].blank? %>
+    <br/>
+    <%= f.label :company %>
+    <br/>
+    <%= f.text_field :company %>
+    <%= @job.errors[:company].first unless @job.errors[:company].blank? %>
+    <br/>
+    <%= f.label :status %>
+    <br/>
+    <%= f.radio_button :status, "hiring" %>
+    <%= label :job_status, "hiring" %>
+    <%= f.radio_button :status, "closed" %>
+    <%= label :job_status, "closed" %>    
+    <br/>
+    <%= f.submit :submit %>
+<% end %>
