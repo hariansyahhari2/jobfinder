@@ -12,14 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_12_10_153001) do
 
-  create_table "add_age_to_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-  end
-
-  create_table "add_collumn_to_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "job_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "job_id"
     t.integer "user_id"
@@ -38,17 +30,17 @@ ActiveRecord::Schema.define(version: 2019_12_10_153001) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "username"
     t.string "email"
-    t.string "password_hash"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "password_salt"
-    t.string "activation_token"
-    t.string "activation_status"
+    t.string "password_hash"
     t.integer "age"
     t.string "first_name"
     t.string "last_name"
     t.string "experience_status"
     t.string "attachment"
+    t.string "activation_token"
+    t.string "activation_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :jobs
   resources :users
   resources :sessions
+  #post "/jobusers/create", to: 'job_users#create', as:new_jobusers
   #get "/sessions", to: 'session#index', as: :sessions
   #post "/sessions", to: 'sessions#create', as: :sessions
   post "/sessions/new", to: 'sessions#new', as: :new_sessions
