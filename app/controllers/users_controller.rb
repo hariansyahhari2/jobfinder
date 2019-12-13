@@ -7,8 +7,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @users = User.find_by_id(params[:id])
-end
+    @user = User.find_by_id(current_user.id)
+  end
 
   def create
     @user = User.new(params_user)
@@ -27,12 +27,23 @@ end
     end
   end
 
-  def edit
+  def update
     @user = User.find_by_id(params[:id])
-end
+    if @user.update(params_user)
+      flash[:success] = "Success Update Job"
+      redirect_to root_path
+    else
+      flash[:error] = "Data invalid"
+      render 'edit'
+    end
+  end
+
+  def edit
+    @user = User.find(current_user.id)
+  end
 
   private
   def params_user
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :humanizer_answer, :humanizer_question_id, :age, :attachment)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :humanizer_answer, :humanizer_question_id, :age, :first_name, :last_name, :experience_status, :attachment)
   end
 end

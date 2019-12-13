@@ -1,4 +1,4 @@
-class ConfirmationMailer < ActionMailer::Base
+class ConfirmationMailer < ApplicatonMailer
     def confirm_email(target_email, activation_token)
         @activation_token = activation_token
         mail(to:target_email,

@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-    before_action :check_current_user, only:[:new, :create, :edit, :update, :destroy]
+    before_action :check_current_user, only:[:new, :index, :create, :edit, :update, :destroy]
     
     def index
         @jobs = Job.all.order("created_at DESC")
@@ -11,7 +11,6 @@ class JobsController < ApplicationController
 
     def show
         @job = Job.find_by_id(params[:id])
-        
     end
 
     def edit

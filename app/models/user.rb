@@ -24,6 +24,6 @@ class User < ActiveRecord::Base
             self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
         end
     end
-    has_many :user_user
-    has_many :job, through: :job_user, dependent: :destroy
+    has_many :jobs_users
+    has_many :jobs, through: :jobs_users, dependent: :destroy
 end

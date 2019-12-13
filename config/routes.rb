@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   #get "/sessions", to: 'session#index', as: :sessions
   #post "/sessions", to: 'sessions#create', as: :sessions
   post "/sessions/new", to: 'sessions#new', as: :new_sessions
-
+  post "jobs/:id/apply", to: 'job_user#apply', as: :apply
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'users#index'
 end

@@ -36,5 +36,6 @@ class SessionsController < ApplicationController
     end
 
     def show
+        @session[:user] = Sessions.find_by_id(params[:id])
     end
 end

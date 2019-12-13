@@ -13,6 +13,9 @@
     <%= link_to 'Log-in', new_session_path %>
     <% else %>
     Hello <%= current_user.username %>
+    <br/>
+    <%= link_to 'Edit Profile', edit_user_path(current_user.id) %><br>
+    <%= link_to 'My Profile', user_path(current_user.id) %><br>
     <%= link_to 'Log-Out', session_path(current_user.id), method: "DELETE" %>
     <% end %>
 </h4>
