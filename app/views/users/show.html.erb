@@ -1,14 +1,20 @@
 <h1>Your Profile</h1>
-
 Username: 
 <%= @user.username %><br>
 First name: 
 <%= @user.first_name %><br>
 Last name: 
 <%= @user.last_name %><br>
-Age:
-<%= @user.age %><br>
-Experience status:
-<%= @user.experience_status %><br>
-CV<br>
-<img src="<%= @user.attachment %>" >
+
+<% @user = User.find_by_id(current_user.id) %>
+    Role:
+    <%= @user.role %><br>
+<% if @user.role.eql? "admin" %>
+<% else %>
+    Age:
+    <%= @user.age %><br>
+    Experience status:
+    <%= @user.experience_status %><br>
+    CV<br>
+    <img src="<%= @user.attachment %>" >
+<% end %>

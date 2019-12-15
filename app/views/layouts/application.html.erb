@@ -7,9 +7,101 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   </head>
 
   <body>
-    <%= yield %>
+<% if !current_user %>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <a style="padding-right:25px"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <li class="nav-item">
+      <a class="nav-link"><%= link_to 'Log-in', new_session_path %></a>
+      <a style="padding-right:25px, padding-bottom: 5px"></a>
+  </li>
+</nav>
+<% else %>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <a style="padding-right:25px"></a>
+  <!--<a style="color: white">Hello <%= current_user.username %></a>-->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link"><%= link_to 'Home', root_path %></a>
+            <a style="padding-right:25px"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"><%= link_to 'Edit Profile', edit_user_path(current_user.id) %></a>
+            <a style="padding-right:25px"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"><%= link_to 'My Profile', user_path(current_user.id) %></a>
+            <a style="padding-right:25px"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"><%= link_to 'Log-Out', session_path(current_user.id), method: "DELETE" %></a>
+            <a style="padding-right:25px"></a>
+        </li>
+      </ul>
+    </div>
+</nav>
+<% end %> 
+
+<!--
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav" style="margin-bottom:500">
+          <% if !current_user %>
+            <li class="nav-item">
+                <a class="nav-link"><%= link_to 'Log-in', new_session_path %></a>
+            </li>
+          <% else %>
+            <a style="color: white">Hello <%= current_user.username %></a>
+            <li class="nav-item">
+                <a class="nav-link"><%= link_to 'Edit Profile', edit_user_path(current_user.id) %></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"><%= link_to 'My Profile', user_path(current_user.id) %></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"><%= link_to 'Log-Out', session_path(current_user.id), method: "DELETE" %></a>
+            </li>
+            <% end %>
+        </ul>
+    </div>  
+    </nav>
+    
+    
+
+
+      <h4>
+        <% if !current_user %>
+        <button type="button" class="btn btn-outline-primary"><%= link_to 'Log-in', new_session_path %></button>
+        <% else %>
+        Hello <%= current_user.username %>
+        <br/>
+        <div class="btn-group">
+        <button type="button" class="btn btn-outline-primary"><%= link_to 'Edit Profile', edit_user_path(current_user.id) %></button>
+        <button type="button" class="btn btn-outline-primary"><%= link_to 'My Profile', user_path(current_user.id) %></button>
+        <button type="button" class="btn btn-outline-primary"><%= link_to 'Log-Out', session_path(current_user.id), method: "DELETE" %></button>    
+        </div>
+        <% end %>
+      </h4>
+-->
+  <%= yield %>
   </body>
 </html>

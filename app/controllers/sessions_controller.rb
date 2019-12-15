@@ -10,7 +10,11 @@ class SessionsController < ApplicationController
         if !user_password.blank? and user.password_hash.eql? user_password
             session[:user] = user.id
             flash[:notice] = "Welcome #{user.username}"
-            redirect_to root_path
+            if !user.first_name.blank? or !user.last_name.blank? or !user.experience_status.blank? or !user.attachment.blank?
+                redirect_to root_path
+            else
+                redirect_to edit_user_path(current_user.id)
+            end
         else
             params[:username]
             flash[:error] = "Your data not valid"

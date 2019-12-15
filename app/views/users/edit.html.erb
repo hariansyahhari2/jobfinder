@@ -1,16 +1,21 @@
-<%= form_for @user do |u| %>
-    <%= u.label :first_name %><br>
-    <%= u.text_field :first_name %><br/>
-    <%= u.label :last_name %><br>
-    <%= u.text_field :last_name %><br/>
-    <%= u.label :status %>
-    <br>
-    <%= u.radio_button :experience_status, "Fresh Graduate" %>
-    <%= label :experience_status, "Fresh Graduate" %>
-    <%= u.radio_button :experience_status, "Experienced" %>
-    <%= u.label :experience_status, "Experienced" %>
-    <br>
-    <p> Upload CV </p>
-    <%= u.file_field :attachment %><br><br>
-    <%= u.submit :Update %>
+<% @user = User.find_by_id(current_user.id) %>
+<% if @user.role.eql? "admin" %>
+<% else %>
+    <%= form_for @user do |u| %>
+        <%= u.label :first_name %><br>
+        <%= u.text_field :first_name %><br/>
+        <%= u.label :last_name %><br>
+        <%= u.text_field :last_name %><br/>
+        <%= u.label :status %>
+        <br>
+        <%= u.radio_button :experience_status, "Fresh Graduate" %>
+        <%= label :experience_status, "Fresh Graduate" %>
+        <%= u.radio_button :experience_status, "Experienced" %>
+        <%= u.label :experience_status, "Experienced" %>
+        <br>
+        <p> Upload CV </p>
+        <%= u.file_field :attachment %><br><br>
+        <%= u.submit :Update %>
+    <% end %>
 <% end %>
+

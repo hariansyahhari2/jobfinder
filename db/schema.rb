@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2019_12_10_153001) do
   create_table "jobs_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "job_id"
     t.integer "user_id"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_12_10_153001) do
     t.string "password_salt"
     t.string "password_hash"
     t.integer "age"
+    t.string "role"
     t.string "first_name"
     t.string "last_name"
     t.string "experience_status"

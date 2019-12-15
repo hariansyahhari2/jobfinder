@@ -66,4 +66,4 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'humanizer'
 
 gem 'carrierwave'
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.3.1'

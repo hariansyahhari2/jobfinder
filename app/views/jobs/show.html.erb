@@ -3,5 +3,9 @@
 at
 <%= @job.company%>
 <p>Status: <%= @job.status%></p>
-<%= link_to 'index', jobs_path%>
+<%= link_to 'Index', jobs_path%>
+<% @user = User.find_by_id(current_user.id) %>
+<% if @user.role.eql? "admin" %>
+<% else %>
 <%= link_to 'apply', apply_path, method: :post%>
+<% end %>

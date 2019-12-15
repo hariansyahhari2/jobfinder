@@ -1,21 +1,21 @@
 <h3>Jobs available</h3>
-<% @jobs.each do |j| %>
-    <h4><%= j.job_title %></h4>
-    <p style ="margin-left: 15px"><%= j.company %></p>
-    <p style ="margin-left: 15px"><%= j.status %></p>
-    <span style ="margin-left: 15px"><%= link_to 'read more',  job_path(j.id) %></span>
-    <span style ="margin-left: 15px"><%= link_to 'edit',  edit_job_path(j.id) %></span>
-    <span style ="margin-left: 15px"><%= link_to 'delete', job_path(j.id), method: "DELETE", data:{confirm:'Delete this job?'} %></span>
-<% end %>
-
-<h4>
-    <% if !current_user %>
-    <%= link_to 'Log-in', new_session_path %>
-    <% else %>
-    Hello <%= current_user.username %>
-    <br/>
-    <%= link_to 'Edit Profile', edit_user_path(current_user.id) %><br>
-    <%= link_to 'My Profile', user_path(current_user.id) %><br>
-    <%= link_to 'Log-Out', session_path(current_user.id), method: "DELETE" %>
+<% @user = User.find_by_id(current_user.id) %>
+<% if @user.role.eql? "admin" %>
+    <% @jobs.each do |j| %>
+        <h4><%= j.job_title %></h4>
+        <p style ="margin-left: 15px"><%= j.company %></p>
+        <p style ="margin-left: 15px"><%= j.status %></p>
+        <button type="button" class="btn btn-outline-primary"><%= link_to 'read more',  job_path(j.id) %></button>
+        <button type="button" class="btn btn-outline-primary"><%= link_to 'edit',  edit_job_path(j.id) %></button>
+        <button type="button" class="btn btn-outline-primary"><%= link_to 'delete', job_path(j.id), method: "DELETE", data:{confirm:'Delete this job?'} %></button>
     <% end %>
-</h4>
+    <br><br><br>
+    <button type="button" class="btn btn-outline-primary"><%= link_to 'Submit new Job',  new_job_path %></button>
+<% else %>
+    <% @jobs.each do |j| %>
+        <h4><%= j.job_title %></h4>
+        <p style ="margin-left: 15px"><%= j.company %></p>
+        <p style ="margin-left: 15px"><%= j.status %></p>
+        <button type="button" class="btn btn-outline-primary"><%= link_to 'read more',  job_path(j.id) %></button>
+    <% end %>
+<% end %>

@@ -1,20 +1,25 @@
-<%= form_for @job do |f| %>
-    <%= f.label :job_title %>
-    <br/>
-    <%= f.text_field :job_title %>
-    <%= @job.errors[:job_title].first unless @job.errors[:job_title].blank? %>
-    <br/>
-    <%= f.label :company %>
-    <br/>
-    <%= f.text_field :company %>
-    <%= @job.errors[:company].first unless @job.errors[:company].blank? %>
-    <br/>
-    <%= f.label :status %>
-    <br/>
-    <%= f.radio_button :status, "hiring" %>
-    <%= label :status, "hiring" %>
-    <%= f.radio_button :status, "closed" %>
-    <%= label :status, "closed" %>    
-    <br/>
-    <%= f.submit :submit %>
+<% @user = User.find_by_id(current_user.id) %>
+<% if @user.role.eql? "admin" %>
+    <%= form_for @job do |f| %>
+        <%= f.label :job_title %>
+        <br/>
+        <%= f.text_field :job_title %>
+        <%= @job.errors[:job_title].first unless @job.errors[:job_title].blank? %>
+        <br/>
+        <%= f.label :company %>
+        <br/>
+        <%= f.text_field :company %>
+        <%= @job.errors[:company].first unless @job.errors[:company].blank? %>
+        <br/>
+        <%= f.label :status %>
+        <br/>
+        <%= f.radio_button :status, "hiring" %>
+        <%= label :status, "hiring" %>
+        <%= f.radio_button :status, "closed" %>
+        <%= label :status, "closed" %>    
+        <br/>
+        <%= f.submit :submit %>
+    <% end %>
+<% else %>
+    <h3>You have no access for this page</h3>
 <% end %>
