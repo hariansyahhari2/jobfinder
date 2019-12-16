@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
     helper_method :current_user, :check_current_user
 
     def current_user
-        current_user ||= User.where("id = ? and activation_status = ?", session[:user],'active').first
+        current_user ||= User.where("id = ?", session[:user]).first
     end
 
     def check_current_user

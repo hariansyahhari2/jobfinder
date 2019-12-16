@@ -5,6 +5,7 @@
         <p style ="margin-left: 15px"><%= j.company %></p>
         <p style ="margin-left: 15px"><%= j.status %></p>
         <button type="button" class="btn btn-outline-primary"><%= link_to 'read more',  job_path(j.id) %></button>
+        <br><br>
     <% end %>
 <% else %>
     <% @user = User.find_by_id(current_user.id) %>

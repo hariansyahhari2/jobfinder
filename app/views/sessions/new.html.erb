@@ -1,3 +1,4 @@
+<h2>LOGIN TO YOUR ACCOUNT</h2>
 <%= form_tag sessions_path do %>
 <%= label_tag :username %><br/>
 <%= text_field_tag :username,(params[:username] unless params[:username].blank?) %>
@@ -8,4 +9,5 @@
 <%= submit_tag :submit %>
 <% end %>
 <br><br>
+<h5>Don't have account yet?</h5>
 <button type="button" class="btn btn-outline-primary"><%= link_to 'Sign up',  sign_up_path %></button>

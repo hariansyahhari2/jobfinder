@@ -15,6 +15,7 @@ Last name:
     <%= @user.age %><br>
     Experience status:
     <%= @user.experience_status %><br>
-    CV<br>
-    <img src="<%= @user.attachment %>" >
+    <button type="button" class="btn btn-outline-primary"><%= link_to "Download CV", @user.attachment_url %></button><br><br>
+    <button type="button" class="btn btn-outline-primary"><%= link_to 'Edit Profile', edit_user_path(current_user.id) %></button>
 <% end %>
+

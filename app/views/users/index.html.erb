@@ -8,15 +8,11 @@
         <button type="button" class="btn btn-outline-primary"><%= link_to "Download CV", u.attachment_url %></button>
         <p>Applied jobs list</p>
         <% @applied = JobsUser.where(user_id: u.id) %>
-        <% if @applied.eql? nil %>
-            <a>You have no applied job</a>
-        <% else %>
-            <% @job = Job.where(id: @applied) %>
-            <% @job.each do |j| %>
-                <p style ="margin-left: 15px"><%= j.job_title %></p>
-                <p style ="margin-left: 30px"><%= j.company %></p>
-                <p style ="margin-left: 30px">Date applied: <%= j.updated_at %></p>
-            <% end %>
+        <% @job = Job.where(id: @applied) %>
+        <% @job.each do |j| %>
+            <p style ="margin-left: 15px"><%= j.job_title %></p>
+            <p style ="margin-left: 30px"><%= j.company %></p>
+            <p style ="margin-left: 30px">Date applied: <%= j.updated_at %></p>
         <% end %>
     <% end %>
 

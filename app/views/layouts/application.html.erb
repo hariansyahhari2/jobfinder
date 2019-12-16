@@ -19,11 +19,11 @@
   <a class="navbar-brand" href="#">GUEST</a>
   <% else %>
     <% if @user.role.eql? "admin" %>
-      <a class="navbar-brand" href="#">ADMIN</a>
+      <a class="navbar-brand" style="color:white">ADMIN | Hello <%= current_user.username %></a>
     <% else %>
-      <a class="navbar-brand" href="#">USER</a>
+      <a class="navbar-brand" style="color:white">MEMBER | Hello <%= current_user.username %></a>
     <% end %>
-    <a class="navbar-brand" href="#">| Hello <%= current_user.username %></a>
+    
   <% end %>
   <a style="padding-right:25px"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
