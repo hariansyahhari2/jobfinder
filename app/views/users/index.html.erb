@@ -1,2 +1,40 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<% @user = User.find_by_id(current_user.id) %>
+<% if @user.role.eql? "admin" %>
+    
+    <% @users.each do |u| %>
+        Username: <%= u.username %><br>
+        First Name: <%= u.first_name %><br>
+        Last Name: <%= u.last_name %><br>
+        <button type="button" class="btn btn-outline-primary"><%= link_to "Download CV", u.attachment_url %></button>
+        <p>Applied jobs list</p>
+        <% @applied = JobsUser.where(user_id: u.id) %>
+        <% if @applied.eql? nil %>
+            <a>You have no applied job</a>
+        <% else %>
+            <% @job = Job.where(id: @applied) %>
+            <% @job.each do |j| %>
+                <p style ="margin-left: 15px"><%= j.job_title %></p>
+                <p style ="margin-left: 30px"><%= j.company %></p>
+                <p style ="margin-left: 30px">Date applied: <%= j.updated_at %></p>
+            <% end %>
+        <% end %>
+    <% end %>
+
+    <br><br><br>
+<% else %>
+    <% @user = User.find_by_id(current_user.id) %>
+    <% @applied = JobsUser.where(user_id: current_user.id) %>
+    <% @job = Job.where(id: @applied) %>
+    <% if @applied.eql? nil %>
+        <a>You have no applied job</a>
+    <% else %>
+    <h3>Job application list</h3>
+    <% @job = Job.where(id: @applied) %>
+        <% @job.each do |j| %>
+            <p style ="margin-left: 15px"><%= j.job_title %></p>
+            <p style ="margin-left: 30px"><%= j.company %></p>
+            <p style ="margin-left: 30px">Date applied: <%= j.updated_at %></p>
+        <% end %>
+    <% end %>
+<% end %>
+

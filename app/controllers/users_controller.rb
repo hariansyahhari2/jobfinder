@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @users = User.all.order("created_at DESC")
   end
 
   def new
@@ -45,5 +46,16 @@ class UsersController < ApplicationController
   private
   def params_user
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :humanizer_answer, :humanizer_question_id, :age, :role, :first_name, :last_name, :experience_status, :attachment)
+  end
+
+  def destroy
+    @user = User.find_by_id(params[:id])
+    if @user.destroy
+        flash[:success] = "Success Delete User"
+        redirect_to action: "index"
+    else
+        flash[:success] = "Success Delete Records"
+        redirect_to action: "index"
+    end
   end
 end

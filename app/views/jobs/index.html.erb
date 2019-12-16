@@ -1,21 +1,30 @@
 <h3>Jobs available</h3>
-<% @user = User.find_by_id(current_user.id) %>
-<% if @user.role.eql? "admin" %>
+<% if current_user.eql? nil %>
     <% @jobs.each do |j| %>
         <h4><%= j.job_title %></h4>
         <p style ="margin-left: 15px"><%= j.company %></p>
         <p style ="margin-left: 15px"><%= j.status %></p>
         <button type="button" class="btn btn-outline-primary"><%= link_to 'read more',  job_path(j.id) %></button>
-        <button type="button" class="btn btn-outline-primary"><%= link_to 'edit',  edit_job_path(j.id) %></button>
-        <button type="button" class="btn btn-outline-primary"><%= link_to 'delete', job_path(j.id), method: "DELETE", data:{confirm:'Delete this job?'} %></button>
     <% end %>
-    <br><br><br>
-    <button type="button" class="btn btn-outline-primary"><%= link_to 'Submit new Job',  new_job_path %></button>
 <% else %>
-    <% @jobs.each do |j| %>
-        <h4><%= j.job_title %></h4>
-        <p style ="margin-left: 15px"><%= j.company %></p>
-        <p style ="margin-left: 15px"><%= j.status %></p>
-        <button type="button" class="btn btn-outline-primary"><%= link_to 'read more',  job_path(j.id) %></button>
+    <% @user = User.find_by_id(current_user.id) %>
+    <% if @user.role.eql? "admin" %>
+        <% @jobs.each do |j| %>
+            <h4><%= j.job_title %></h4>
+            <p style ="margin-left: 15px"><%= j.company %></p>
+            <p style ="margin-left: 15px"><%= j.status %></p>
+            <button type="button" class="btn btn-outline-primary"><%= link_to 'read more',  job_path(j.id) %></button>
+            <button type="button" class="btn btn-outline-primary"><%= link_to 'edit',  edit_job_path(j.id) %></button>
+            <button type="button" class="btn btn-outline-primary"><%= link_to 'delete', job_path(j.id), method: "DELETE", data:{confirm:'Delete this job?'} %></button>
+            <br><br>
+        <% end %>
+        <button type="button" class="btn btn-outline-primary"><%= link_to 'Submit new Job',  new_job_path %></button>
+    <% else %>
+        <% @jobs.each do |j| %>
+            <h4><%= j.job_title %></h4>
+            <p style ="margin-left: 15px"><%= j.company %></p>
+            <p style ="margin-left: 15px"><%= j.status %></p>
+            <button type="button" class="btn btn-outline-primary"><%= link_to 'read more',  job_path(j.id) %></button>
+        <% end %>
     <% end %>
 <% end %>

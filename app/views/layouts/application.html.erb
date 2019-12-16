@@ -14,36 +14,49 @@
   </head>
 
   <body>
-<% if !current_user %>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <% if !current_user %>
+  <a class="navbar-brand" href="#">GUEST</a>
+  <% else %>
+    <% if @user.role.eql? "admin" %>
+      <a class="navbar-brand" href="#">ADMIN</a>
+    <% else %>
+      <a class="navbar-brand" href="#">USER</a>
+    <% end %>
+    <a class="navbar-brand" href="#">| Hello <%= current_user.username %></a>
+  <% end %>
   <a style="padding-right:25px"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <li class="nav-item">
-      <a class="nav-link"><%= link_to 'Log-in', new_session_path %></a>
-      <a style="padding-right:25px, padding-bottom: 5px"></a>
-  </li>
-</nav>
-<% else %>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <a style="padding-right:25px"></a>
-  <!--<a style="color: white">Hello <%= current_user.username %></a>-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
+      <% if !current_user %>
+        <li class="nav-item">
+            <a class="nav-link"><%= link_to 'Log-in', new_session_path %></a>
+            <a style="padding-right:25px, padding-bottom: 5px"></a>
+        </li>
+        <% else %>
         <li class="nav-item">
             <a class="nav-link"><%= link_to 'Home', root_path %></a>
+            <a style="padding-right:25px"></a>
+        </li>
+        <% @user = User.find_by_id(current_user.id) %>
+        <% if @user.role.eql? "admin" %>
+        <li class="nav-item">
+            <a class="nav-link"><%= link_to 'Manage Applicant', users_path %></a>
             <a style="padding-right:25px"></a>
         </li>
         <li class="nav-item">
             <a class="nav-link"><%= link_to 'Edit Profile', edit_user_path(current_user.id) %></a>
             <a style="padding-right:25px"></a>
         </li>
+        <% else %>
+        <li class="nav-item">
+            <a class="nav-link"><%= link_to 'Edit Profile', edit_user_path(current_user.id) %></a>
+            <a style="padding-right:25px"></a>
+        </li>
+        <% end %>
         <li class="nav-item">
             <a class="nav-link"><%= link_to 'My Profile', user_path(current_user.id) %></a>
             <a style="padding-right:25px"></a>
@@ -52,56 +65,11 @@
             <a class="nav-link"><%= link_to 'Log-Out', session_path(current_user.id), method: "DELETE" %></a>
             <a style="padding-right:25px"></a>
         </li>
+        <% end %>
       </ul>
     </div>
 </nav>
-<% end %> 
 
-<!--
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav" style="margin-bottom:500">
-          <% if !current_user %>
-            <li class="nav-item">
-                <a class="nav-link"><%= link_to 'Log-in', new_session_path %></a>
-            </li>
-          <% else %>
-            <a style="color: white">Hello <%= current_user.username %></a>
-            <li class="nav-item">
-                <a class="nav-link"><%= link_to 'Edit Profile', edit_user_path(current_user.id) %></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"><%= link_to 'My Profile', user_path(current_user.id) %></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"><%= link_to 'Log-Out', session_path(current_user.id), method: "DELETE" %></a>
-            </li>
-            <% end %>
-        </ul>
-    </div>  
-    </nav>
-    
-    
-
-
-      <h4>
-        <% if !current_user %>
-        <button type="button" class="btn btn-outline-primary"><%= link_to 'Log-in', new_session_path %></button>
-        <% else %>
-        Hello <%= current_user.username %>
-        <br/>
-        <div class="btn-group">
-        <button type="button" class="btn btn-outline-primary"><%= link_to 'Edit Profile', edit_user_path(current_user.id) %></button>
-        <button type="button" class="btn btn-outline-primary"><%= link_to 'My Profile', user_path(current_user.id) %></button>
-        <button type="button" class="btn btn-outline-primary"><%= link_to 'Log-Out', session_path(current_user.id), method: "DELETE" %></button>    
-        </div>
-        <% end %>
-      </h4>
--->
   <%= yield %>
   </body>
 </html>
